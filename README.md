@@ -30,3 +30,41 @@ Run tests using:
 
 ```bash
 python -m pytest
+
+## 🧩 System Design (UML)
+
+```mermaid
+classDiagram
+
+class Owner {
+  +name
+  +pets
+  +add_pet()
+  +get_all_tasks()
+}
+
+class Pet {
+  +name
+  +tasks
+  +add_task()
+}
+
+class Task {
+  +description
+  +time
+  +frequency
+  +completed
+  +mark_complete()
+}
+
+class Scheduler {
+  +owner
+  +get_sorted_tasks()
+  +filter_tasks()
+  +detect_conflicts()
+}
+
+Owner --> Pet
+Pet --> Task
+Scheduler --> Owner
+
