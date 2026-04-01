@@ -4,13 +4,21 @@
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+- I designed a modular system using four main classes: Owner, Pet, Task, and Scheduler.
+
+The Owner class is responsible for managing multiple pets and providing access to all tasks across those pets. The Pet class represents individual animals and stores a list of tasks associated with each pet. The Task class represents specific activities such as feeding, walking, or medication, including attributes like time, frequency, and completion status.
+
+The Scheduler class acts as the central logic layer that retrieves tasks from the Owner and organizes them. It is responsible for sorting tasks, filtering them, and detecting conflicts.
+
+This design separates responsibilities clearly and follows object-oriented programming principles, making the system easy to understand and extend.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+- After reviewing my initial design with AI assistance, I made a small but important improvement by ensuring that the Scheduler interacts with the Owner class to retrieve tasks instead of directly accessing individual pets.
+
+This change improved encapsulation and made the system more modular. I also decided to use Python dataclasses for the Task and Pet classes to simplify code structure and improve readability.
+
+These adjustments helped make the design cleaner and more maintainable.
 
 ---
 
