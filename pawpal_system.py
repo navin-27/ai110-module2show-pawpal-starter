@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List
+from datetime import datetime, timedelta
 
 
 @dataclass
@@ -11,6 +12,19 @@ class Task:
 
     def mark_complete(self):
         self.completed = True
+
+        # Handle daily recurring tasks
+        if self.frequency == "daily":
+            time_obj = datetime.strptime(self.time, "%H:%M")
+            next_time = time_obj + timedelta(days=1)
+
+            return Task(
+                description=self.description,
+                time=next_time.strftime("%H:%M"),
+                frequency=self.frequency
+            )
+
+        return None
 
 
 @dataclass
@@ -41,24 +55,38 @@ class Scheduler:
     def __init__(self, owner: Owner):
         self.owner = owner
 
+    # ✅ Improved sorting
     def get_sorted_tasks(self):
-        return sorted(self.owner.get_all_tasks(), key=lambda t: t.time)
+        return sorted(
+            self.owner.get_all_tasks(),
+            key=lambda t: tuple(map(int, t.time.split(":")))
+        )
 
-    def filter_tasks(self, completed=None):
+    # ✅ Filtering
+    def filter_tasks(self, completed=None, pet_name=None):
         tasks = self.owner.get_all_tasks()
-        if completed is None:
-            return tasks
-        return [t for t in tasks if t.completed == completed]
 
+        if completed is not None:
+            tasks = [t for t in tasks if t.completed == completed]
+
+        if pet_name:
+            tasks = [
+                t for pet in self.owner.pets if pet.name == pet_name
+                for t in pet.tasks
+            ]
+
+        return tasks
+
+    # ✅ Better conflict detection
     def detect_conflicts(self):
         tasks = self.owner.get_all_tasks()
-        seen = {}
+        time_map = {}
         conflicts = []
 
         for task in tasks:
-            if task.time in seen:
-                conflicts.append(task)
+            if task.time in time_map:
+                conflicts.append((task, time_map[task.time]))
             else:
-                seen[task.time] = task
+                time_map[task.time] = task
 
         return conflicts

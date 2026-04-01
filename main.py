@@ -25,7 +25,8 @@ for task in scheduler.get_sorted_tasks():
 
 # Check conflicts
 conflicts = scheduler.detect_conflicts()
+
 if conflicts:
     print("\n⚠ Conflicts detected:")
-    for task in conflicts:
-        print(f"{task.time} - {task.description}")
+    for task1, task2 in conflicts:
+        print(f"{task1.time} - {task1.description} conflicts with {task2.description}")
