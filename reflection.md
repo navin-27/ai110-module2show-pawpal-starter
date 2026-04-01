@@ -4,7 +4,7 @@
 
 **a. Initial design**
 
-- I designed a modular system using four main classes: Owner, Pet, Task, and Scheduler.
+I designed a modular system using four main classes: Owner, Pet, Task, and Scheduler.
 
 The Owner class is responsible for managing multiple pets and providing access to all tasks across those pets. The Pet class represents individual animals and stores a list of tasks associated with each pet. The Task class represents specific activities such as feeding, walking, or medication, including attributes like time, frequency, and completion status.
 
@@ -12,9 +12,11 @@ The Scheduler class acts as the central logic layer that retrieves tasks from th
 
 This design separates responsibilities clearly and follows object-oriented programming principles, making the system easy to understand and extend.
 
+---
+
 **b. Design changes**
 
-- After reviewing my initial design with AI assistance, I made a small but important improvement by ensuring that the Scheduler interacts with the Owner class to retrieve tasks instead of directly accessing individual pets.
+After reviewing my initial design with AI assistance, I made a small but important improvement by ensuring that the Scheduler interacts with the Owner class to retrieve tasks instead of directly accessing individual pets.
 
 This change improved encapsulation and made the system more modular. I also decided to use Python dataclasses for the Task and Pet classes to simplify code structure and improve readability.
 
@@ -26,13 +28,17 @@ These adjustments helped make the design cleaner and more maintainable.
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+The scheduler primarily considers time as the main constraint, ensuring that tasks are ordered correctly throughout the day. It also considers task completion status and supports recurring tasks such as daily activities.
+
+Time was prioritized because the main goal of the system is to organize tasks efficiently in a daily schedule. Ensuring correct ordering of tasks is essential for usability.
+
+---
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+One tradeoff in the scheduler is that it only detects conflicts when tasks have exactly the same time, rather than handling overlapping time durations.
+
+This tradeoff simplifies the implementation while still providing useful conflict detection for most basic scheduling scenarios.
 
 ---
 
@@ -40,13 +46,17 @@ These adjustments helped make the design cleaner and more maintainable.
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+I used AI tools such as VS Code Copilot and Claude to help brainstorm the system design, generate class structures, and implement algorithms.
+
+AI was especially helpful for writing sorting logic, generating test cases, and debugging errors during development.
+
+---
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+One instance where I did not fully accept an AI suggestion was when refining the conflict detection logic. I modified the implementation to return pairs of conflicting tasks instead of a simple list.
+
+I verified AI suggestions by running the code, testing outputs, and ensuring the logic matched the intended design.
 
 ---
 
@@ -54,13 +64,17 @@ These adjustments helped make the design cleaner and more maintainable.
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+I tested core behaviors including task completion, adding tasks to pets, sorting tasks by time, detecting scheduling conflicts, and handling recurring tasks.
+
+These tests are important because they verify that the system’s main functionality works correctly and ensure reliability in managing pet care schedules.
+
+---
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+I am confident that my scheduler works correctly for the main use cases, including sorting, filtering, and conflict detection.
+
+If I had more time, I would test edge cases such as invalid time formats, overlapping time ranges, and handling pets with no tasks.
 
 ---
 
@@ -68,12 +82,16 @@ These adjustments helped make the design cleaner and more maintainable.
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+The modular design of the system worked well, especially separating the Scheduler from the data classes. This made the code easier to manage and extend.
+
+---
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+If I had more time, I would improve the scheduling logic to handle overlapping time ranges and add priority-based scheduling.
+
+---
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+One key takeaway from this project is the importance of designing a clear system architecture before implementation and effectively using AI as a collaborative tool while still verifying and refining its output.
